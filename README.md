@@ -1,10 +1,10 @@
 # QLShop
-# DATABASE NAME: QLShopQA
-# TABLE
-  # -NHANVIEN
-    +MANV --PR
-    +TENNV
-    +GIOITINH
+DATABASE NAME: QLShopQA \
+TABLE \ 
+   - NHANVIEN \
+    +MANV --PR \
+    +TENNV \
+    +GIOITINH \
     +CMND
     +NGAYSINH
     +CHUCVU

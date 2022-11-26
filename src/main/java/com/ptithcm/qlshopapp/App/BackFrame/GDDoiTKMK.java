@@ -4,7 +4,7 @@
  */
 package com.ptithcm.qlshopapp.App.BackFrame;
 
-import com.ptithcm.qlshopapp.DAO.Dao_Main;
+import com.ptithcm.qlshopapp.DAO.Dao_NhanVien;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -334,7 +334,7 @@ public class GDDoiTKMK extends javax.swing.JFrame {
             GDThongtin obj = new GDThongtin(nv);
             obj.setVisible(true);
             try {
-                new Dao_Main().UpdateTKMK(nv);
+                new Dao_NhanVien().UpdateTKMK(nv);
             } catch (Exception ex) {
                 Logger.getLogger(GDDoiTKMK.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -4,7 +4,8 @@
  */
 package com.ptithcm.qlshopapp.App.BackFrame;
 
-import com.ptithcm.qlshopapp.DAO.Dao_Main;
+import com.ptithcm.qlshopapp.DAO.Dao_NhanVien;
+import com.ptithcm.qlshopapp.DAO.Dao_SanPham;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import com.ptithcm.qlshopapp.Model.SanPham;
 import java.awt.Component;
@@ -32,7 +33,7 @@ public class GDXemKho extends javax.swing.JFrame {
         initTable();
         this.nv = nv;
         lsp = new ArrayList<>();
-        Dao_Main dao = new Dao_Main();
+        Dao_SanPham dao = new Dao_SanPham();
         try {
             lsp = dao.getAllSP();
         } catch (Exception ex) {

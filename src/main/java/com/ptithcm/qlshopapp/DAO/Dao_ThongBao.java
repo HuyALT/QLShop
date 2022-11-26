@@ -32,7 +32,25 @@ public class Dao_ThongBao {
     
     public List<ThongBao> getAllTB() throws Exception {
         List<ThongBao> ltb = new ArrayList<>();
-        String sql = "Select * from THONGBAO";
+        String sql = "Select * from THONGBAO ORDER BY NGAY DESC";
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();){
+            while (rs.next()) {
+                ThongBao tb = new ThongBao();
+                tb.setMatb(rs.getString("MATB"));
+                tb.setNoidung(rs.getString("NOIDUNG"));
+                tb.setNgay(rs.getString("NGAY"));
+                ltb.add(tb);
+            }
+            return ltb;
+        }
+    }
+    
+    public List<ThongBao> getTop5TB() throws Exception {
+        List<ThongBao> ltb = new ArrayList<>();
+        String sql = "Select TOP 5 * from THONGBAO ORDER BY NGAY DESC";
         try (
                 Connection con = OpenConnectDataBase.OpenConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);

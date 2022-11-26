@@ -5,7 +5,13 @@
 package com.ptithcm.qlshopapp.App.BackFrame;
 
 import com.ptithcm.qlshopapp.App.Login;
+import com.ptithcm.qlshopapp.DAO.Dao_ThongBao;
 import com.ptithcm.qlshopapp.Model.NhanVien;
+import com.ptithcm.qlshopapp.Model.ThongBao;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,14 +27,18 @@ public class GDNhanVien extends javax.swing.JFrame {
     DefaultTableModel model;
     
     private NhanVien nv;
+    private List<ThongBao> TBmoi;
     public GDNhanVien(NhanVien nv) {
+        TBmoi = new ArrayList<>();
         initComponents();
+        initTable();
         this.nv = nv;
         if (nv!=null)
         {
             lbl_name.setText(nv.getTenNV());
             lbl_chucvu.setText(nv.getChucVu());
         }
+        fillTable();
     }
 
     /**
@@ -54,7 +64,7 @@ public class GDNhanVien extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         btnxemkho = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnxemtb = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblThongbao = new javax.swing.JTable();
@@ -152,8 +162,10 @@ public class GDNhanVien extends javax.swing.JFrame {
                 .addComponent(btnLogout)
                 .addGap(18, 18, 18)
                 .addComponent(btnthongtin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 153));
 
         jButton3.setText("Xuất hóa đơn");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -169,10 +181,10 @@ public class GDNhanVien extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Xem tất cả thông báo");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnxemtb.setText("Xem tất cả thông báo");
+        btnxemtb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnxemtbActionPerformed(evt);
             }
         });
 
@@ -184,7 +196,7 @@ public class GDNhanVien extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btnxemtb)
                 .addGap(27, 27, 27)
                 .addComponent(btnxemkho, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
@@ -196,13 +208,14 @@ public class GDNhanVien extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(btnxemkho)
-                    .addComponent(jButton5))
+                    .addComponent(btnxemtb))
                 .addGap(22, 22, 22))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("THÔNG BÁO MỚI");
 
+        tblThongbao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tblThongbao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -213,7 +226,20 @@ public class GDNhanVien extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblThongbao.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblThongbao.setRowSelectionAllowed(false);
+        tblThongbao.getTableHeader().setResizingAllowed(false);
+        tblThongbao.getTableHeader().setReorderingAllowed(false);
+        tblThongbao.setUpdateSelectionOnSort(false);
         jScrollPane4.setViewportView(tblThongbao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,23 +249,21 @@ public class GDNhanVien extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(16, 16, 16))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(16, 16, 16))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,14 +271,14 @@ public class GDNhanVien extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -275,9 +299,10 @@ public class GDNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnxemtbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemtbActionPerformed
+        GDTatcaTB obj = new GDTatcaTB();
+        obj.setVisible(true);
+    }//GEN-LAST:event_btnxemtbActionPerformed
 
     private void btnthongtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthongtinActionPerformed
         this.setVisible(false);
@@ -331,8 +356,8 @@ public class GDNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnthongtin;
     private javax.swing.JButton btnxemkho;
+    private javax.swing.JButton btnxemtb;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -347,4 +372,31 @@ public class GDNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_name;
     private javax.swing.JTable tblThongbao;
     // End of variables declaration//GEN-END:variables
+
+    private void initTable() {
+        model = (DefaultTableModel) tblThongbao.getModel();
+        model.setColumnIdentifiers(new Object[]{
+                "MÃ THÔNG BÁO", "NỘI DUNG","NGÀY"
+        });
+        model.setRowCount(0);
+        try {
+            Dao_ThongBao dao = new Dao_ThongBao();
+            TBmoi = dao.getTop5TB();
+            } catch (Exception ex) {
+                Logger.getLogger(GDNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        tblThongbao.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblThongbao.getColumnModel().getColumn(1).setPreferredWidth(445);
+        tblThongbao.getColumnModel().getColumn(2).setPreferredWidth(100);
+    }
+    private void fillTable() {
+        model.setRowCount(0);
+        for (ThongBao tb:TBmoi){
+            Object[] row = new Object[]{
+                tb.getMatb(), tb.getNoidung(), tb.getNgay()
+            };
+            model.addRow(row);
+        }
+        
+    }
 }

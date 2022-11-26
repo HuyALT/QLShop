@@ -4,9 +4,8 @@
  */
 package com.ptithcm.qlshopapp.App.BackFrame;
 
-import com.ptithcm.qlshopapp.DAO.Dao_SanPham;
-import com.ptithcm.qlshopapp.Model.NhanVien;
-import com.ptithcm.qlshopapp.Model.SanPham;
+import com.ptithcm.qlshopapp.DAO.Dao_ThongBao;
+import com.ptithcm.qlshopapp.Model.ThongBao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,26 +16,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author PC
  */
-public class GDXemKho extends javax.swing.JFrame {
+public class GDTatcaTB extends javax.swing.JFrame {
 
     /**
-     * Creates new form GDXemKho
+     * Creates new form GDTatcaTB
      */
-    List<SanPham> lsp;
     DefaultTableModel model;
-    NhanVien nv;
-    public GDXemKho(NhanVien nv) {
+    private List<ThongBao> allTB;
+    public GDTatcaTB() {
+        allTB = new ArrayList<>();
         initComponents();
         initTable();
-        this.nv = nv;
-        lsp = new ArrayList<>();
-        Dao_SanPham dao = new Dao_SanPham();
-        try {
-            lsp = dao.getAllSP();
-        } catch (Exception ex) {
-            Logger.getLogger(GDXemKho.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       fillTable();
+        fillTable();
     }
 
     /**
@@ -48,56 +39,59 @@ public class GDXemKho extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblXemkho = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTB = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         btnThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("KHO HÀNG");
-
-        jPanel1.setBackground(new java.awt.Color(51, 51, 255));
-
-        tblXemkho.setModel(new javax.swing.table.DefaultTableModel(
+        tblTB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblXemkho.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tblXemkho.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane2.setViewportView(tblXemkho);
+        tblTB.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblTB.getTableHeader().setResizingAllowed(false);
+        tblTB.getTableHeader().setReorderingAllowed(false);
+        tblTB.setUpdateSelectionOnSort(false);
+        jScrollPane1.setViewportView(tblTB);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("TẤT CẢ THÔNG BÁO");
 
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
@@ -113,27 +107,26 @@ public class GDXemKho extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnThoat)))
-                        .addGap(23, 23, 23))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnThoat)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThoat)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -142,8 +135,6 @@ public class GDXemKho extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         this.setVisible(false);
-        GDNhanVien obj = new GDNhanVien(nv);
-        obj.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
@@ -163,20 +154,20 @@ public class GDXemKho extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GDXemKho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GDTatcaTB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GDXemKho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GDTatcaTB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GDXemKho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GDTatcaTB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GDXemKho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GDTatcaTB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GDXemKho(null).setVisible(true);
+                new GDTatcaTB().setVisible(true);
             }
         });
     }
@@ -185,31 +176,35 @@ public class GDXemKho extends javax.swing.JFrame {
     private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblXemkho;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblTB;
     // End of variables declaration//GEN-END:variables
 
     private void initTable() {
-        model = (DefaultTableModel) tblXemkho.getModel();
+        
+        model = (DefaultTableModel) tblTB.getModel();
         model.setColumnIdentifiers(new Object[] {
-            "MÃ", "TÊN","SỐ lƯỢNG TỒN","GIÁ","KÍCH THƯỚC"
+                "MÃ THÔNG BÁO","NỘI DUNG", "NGÀY"
         });
         model.setRowCount(0);
-        tblXemkho.getColumnModel().getColumn(0).setPreferredWidth(70);
-        tblXemkho.getColumnModel().getColumn(1).setPreferredWidth(250);
-        tblXemkho.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tblXemkho.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tblXemkho.getColumnModel().getColumn(4).setPreferredWidth(100);
+        try {
+            Dao_ThongBao dao = new Dao_ThongBao();
+            allTB = dao.getAllTB();
+        } catch (Exception ex) {
+            Logger.getLogger(GDTatcaTB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tblTB.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblTB.getColumnModel().getColumn(1).setPreferredWidth(445);
+        tblTB.getColumnModel().getColumn(2).setPreferredWidth(100);
     }
+    
     private void fillTable() {
         model.setRowCount(0);
-        for (SanPham sp : lsp ){
-            Object[] row = new Object[] {
-                sp.getMasp(), sp.getTensp(), sp.getSlTon(), sp.getGia(), sp.getKichThuoc()
+        for (ThongBao tb: allTB){
+            Object[] row = new Object[]{
+                tb.getMatb(), tb.getNoidung(), tb.getNgay()
             };
             model.addRow(row);
         }
     }
-    
-    
 }

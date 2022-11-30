@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.ptithcm.qlshopapp.App.BackFrame;
+package com.ptithcm.qlshopapp.App.BackFrame.NhanVien;
 
+import com.ptithcm.qlshopapp.App.BackFrame.General.GDThongtin;
 import com.ptithcm.qlshopapp.App.Login;
+import com.ptithcm.qlshopapp.DAO.Dao_Login;
 import com.ptithcm.qlshopapp.DAO.Dao_ThongBao;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import com.ptithcm.qlshopapp.Model.ThongBao;
@@ -26,13 +28,12 @@ public class GDNhanVien extends javax.swing.JFrame {
      */
     DefaultTableModel model;
     
-    private NhanVien nv;
+    private NhanVien nv =  Dao_Login.nvlogin;
     private List<ThongBao> TBmoi;
-    public GDNhanVien(NhanVien nv) {
+    public GDNhanVien() {
         TBmoi = new ArrayList<>();
         initComponents();
         initTable();
-        this.nv = nv;
         if (nv!=null)
         {
             lbl_name.setText(nv.getTenNV());
@@ -62,7 +63,7 @@ public class GDNhanVien extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnthongtin = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnXuatHD = new javax.swing.JButton();
         btnxemkho = new javax.swing.JButton();
         btnxemtb = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -167,10 +168,10 @@ public class GDNhanVien extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 153));
 
-        jButton3.setText("Xuất hóa đơn");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatHD.setText("Xuất hóa đơn");
+        btnXuatHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnXuatHDActionPerformed(evt);
             }
         });
 
@@ -194,7 +195,7 @@ public class GDNhanVien extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jButton3)
+                .addComponent(btnXuatHD)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnxemtb)
                 .addGap(27, 27, 27)
@@ -206,7 +207,7 @@ public class GDNhanVien extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btnXuatHD)
                     .addComponent(btnxemkho)
                     .addComponent(btnxemtb))
                 .addGap(22, 22, 22))
@@ -295,9 +296,12 @@ public class GDNhanVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnXuatHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHDActionPerformed
+        this.setVisible(false);
+        GDLapHD obj = new GDLapHD();
+        obj.setVisible(true);
+        GDLapHD.resetCTHD();
+    }//GEN-LAST:event_btnXuatHDActionPerformed
 
     private void btnxemtbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemtbActionPerformed
         GDTatcaTB obj = new GDTatcaTB();
@@ -306,13 +310,13 @@ public class GDNhanVien extends javax.swing.JFrame {
 
     private void btnthongtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthongtinActionPerformed
         this.setVisible(false);
-        GDThongtin obj = new GDThongtin(nv);
+        GDThongtin obj = new GDThongtin();
         obj.setVisible(true);
     }//GEN-LAST:event_btnthongtinActionPerformed
 
     private void btnxemkhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemkhoActionPerformed
         this.setVisible(false);
-        GDXemKho obj = new GDXemKho(nv);
+        GDXemKho obj = new GDXemKho();
         obj.setVisible(true);
     }//GEN-LAST:event_btnxemkhoActionPerformed
 
@@ -347,17 +351,17 @@ public class GDNhanVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GDNhanVien(null).setVisible(true);
+                new GDNhanVien().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnXuatHD;
     private javax.swing.JButton btnthongtin;
     private javax.swing.JButton btnxemkho;
     private javax.swing.JButton btnxemtb;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

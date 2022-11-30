@@ -15,6 +15,7 @@ import java.sql.ResultSet;
  * @author PC
  */
 public class Dao_Login {
+    public static NhanVien nvlogin;
     public static NhanVien CheckLogin(String username, String pass) throws Exception {
         String sql = "Select * from NHANVIEN Where TENTAIKHOAN=? AND MATKHAU=?";
         try (
@@ -36,6 +37,7 @@ public class Dao_Login {
                 nv.setTenTK(rs.getString("TENTAIKHOAN"));
                 nv.setMkhau(rs.getString("MATKHAU"));
                 nv.setDaNghi(rs.getBoolean("DANGHI"));
+                nvlogin = nv;
                 return nv;
             }
             return null;

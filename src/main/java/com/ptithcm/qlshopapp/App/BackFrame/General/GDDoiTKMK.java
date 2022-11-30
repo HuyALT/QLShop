@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.ptithcm.qlshopapp.App.BackFrame;
+package com.ptithcm.qlshopapp.App.BackFrame.General;
 
+import com.ptithcm.qlshopapp.DAO.Dao_Login;
 import com.ptithcm.qlshopapp.DAO.Dao_NhanVien;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class GDDoiTKMK extends javax.swing.JFrame {
     /**
      * Creates new form GDDoiTKMK
      */
-    private NhanVien nv;
+    private NhanVien nv = Dao_Login.nvlogin;
     private boolean checkmk = false;
     private boolean ischage = false;
     public GDDoiTKMK(NhanVien nv) {
@@ -331,7 +332,7 @@ public class GDDoiTKMK extends javax.swing.JFrame {
                 nv.setMkhau(String.valueOf(txtpwmoi.getPassword()));
             }
             this.setVisible(false);
-            GDThongtin obj = new GDThongtin(nv);
+            GDThongtin obj = new GDThongtin();
             obj.setVisible(true);
             try {
                 new Dao_NhanVien().UpdateTKMK(nv);

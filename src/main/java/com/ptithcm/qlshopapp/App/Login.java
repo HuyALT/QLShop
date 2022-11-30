@@ -4,7 +4,7 @@
  */
 package com.ptithcm.qlshopapp.App;
 
-import com.ptithcm.qlshopapp.App.BackFrame.GDNhanVien;
+import com.ptithcm.qlshopapp.App.BackFrame.NhanVien.GDNhanVien;
 import com.ptithcm.qlshopapp.DAO.Dao_Login;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import java.util.logging.Level;
@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class Login extends javax.swing.JFrame {
-
     /**
      * Creates new form Login
      */
@@ -164,7 +163,7 @@ public class Login extends javax.swing.JFrame {
                 NhanVien nv = Dao_Login.CheckLogin(sTK, sMK);
                 if (nv!=null&&!nv.isDaNghi())
                 {
-                    GDNhanVien obj = new GDNhanVien(nv);
+                    GDNhanVien obj = new GDNhanVien();
                     obj.setVisible(true);
                     this.setVisible(false);
                 }

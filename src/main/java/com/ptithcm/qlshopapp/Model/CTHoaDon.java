@@ -14,16 +14,25 @@ public class CTHoaDon {
     private String tensp;
     private int slban;
     private int tongtiensp;
+    private String kichthuoc;
 
+    public String getKichthuoc() {
+        return kichthuoc;
+    }
+
+    public void setKichthuoc(String kichthuoc) {
+        this.kichthuoc = kichthuoc;
+    }
     public CTHoaDon() {
     }
 
-    public CTHoaDon(String mahd, String masp, String tensp, int slban, int tongtiensp) {
+    public CTHoaDon(String mahd, String masp, String tensp, int slban, int tongtiensp, String kichthuoc) {
         this.mahd = mahd;
         this.masp = masp;
         this.tensp = tensp;
         this.slban = slban;
         this.tongtiensp = tongtiensp;
+        this.kichthuoc = kichthuoc;
     }
 
     public String getMahd() {

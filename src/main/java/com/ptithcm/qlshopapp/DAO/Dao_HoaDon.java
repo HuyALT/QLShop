@@ -35,14 +35,15 @@ public class Dao_HoaDon {
     }
 
     public boolean ThemCTHD(CTHoaDon cthd) throws Exception {
-        String sql = "INSERT INTO CTHOADON(MAHD, MASP, TENSP, SOLUONGBAN, TONGTIENSP) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO CTHOADON(MAHD, MASP, TENSP, KICHTHUOC, SOLUONGBAN, TONGTIENSP) VALUES(?,?,?,?,?,?)";
         try (
                  Connection con = OpenConnectDataBase.OpenConnection();  PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setString(1, cthd.getMahd());
             pstm.setString(2, cthd.getMasp());
             pstm.setString(3, cthd.getTensp());
-            pstm.setInt(4, cthd.getSlban());
-            pstm.setInt(5, cthd.getTongtiensp());
+            pstm.setString(4,cthd.getKichthuoc());
+            pstm.setInt(5, cthd.getSlban());
+            pstm.setInt(6, cthd.getTongtiensp());
 
             return pstm.executeUpdate() > 0;
         }
@@ -60,6 +61,7 @@ public class Dao_HoaDon {
                     cthd.setMahd(rs.getString("MAHD"));
                     cthd.setMasp(rs.getString("MASP"));
                     cthd.setTensp(rs.getString("TENSP"));
+                    cthd.setKichthuoc(rs.getString("KICHTHUOC"));
                     cthd.setSlban(rs.getInt("SOLUONGBAN"));
                     cthd.setTongtiensp(rs.getInt("TONGTIENSP"));
                     lcthd.add(cthd);

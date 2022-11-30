@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.ptithcm.qlshopapp.App.BackFrame;
+package com.ptithcm.qlshopapp.App.BackFrame.General;
 
+import com.ptithcm.qlshopapp.App.BackFrame.General.GDDoiTKMK;
+import com.ptithcm.qlshopapp.App.BackFrame.NhanVien.GDNhanVien;
 import com.ptithcm.qlshopapp.App.Login;
+import com.ptithcm.qlshopapp.DAO.Dao_Login;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import javax.swing.JOptionPane;
 
@@ -17,10 +20,9 @@ public class GDThongtin extends javax.swing.JFrame {
     /**
      * Creates new form GDThongtin
      */
-    private NhanVien nv;
-    public GDThongtin(NhanVien nv) {
+    private NhanVien nv = Dao_Login.nvlogin;
+    public GDThongtin() {
         initComponents();
-        this.nv = nv;
         if (nv!=null)
         {
             lblmaso.setText(nv.getMaNV());
@@ -122,9 +124,10 @@ public class GDThongtin extends javax.swing.JFrame {
                     .addComponent(lblchucvu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbltentk))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbltentk)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btndoimk)
                 .addGap(25, 25, 25))
@@ -175,7 +178,7 @@ public class GDThongtin extends javax.swing.JFrame {
         if (n==JOptionPane.YES_OPTION)
         {
             this.setVisible(false);
-            GDNhanVien obj = new GDNhanVien(nv);
+            GDNhanVien obj = new GDNhanVien();
             obj.setVisible(true);
         }
     }//GEN-LAST:event_btnThoatActionPerformed
@@ -210,7 +213,7 @@ public class GDThongtin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GDThongtin(null).setVisible(true);
+                new GDThongtin().setVisible(true);
             }
         });
     }

@@ -6,6 +6,7 @@ package com.ptithcm.qlshopapp.App.BackFrame.NhanVien;
 
 import com.ptithcm.qlshopapp.DAO.Dao_HoaDon;
 import com.ptithcm.qlshopapp.DAO.Dao_Login;
+import com.ptithcm.qlshopapp.DAO.Dao_SanPham;
 import com.ptithcm.qlshopapp.Model.CTHoaDon;
 import com.ptithcm.qlshopapp.Model.HoaDon;
 import com.ptithcm.qlshopapp.Model.NhanVien;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,9 +35,9 @@ public class GDLapHD extends javax.swing.JFrame {
     private List<CTHoaDon> lcthd;
     private static String tenkh;
     private static String sdtkh;
+
     public GDLapHD() {
         lhd = new ArrayList<>();
-        lcthd = g_cthd;
         initComponents();
         initHoaDon();
         initTable();
@@ -45,6 +47,8 @@ public class GDLapHD extends javax.swing.JFrame {
         }
         txtTenKH.setText(tenkh);
         txtsdtKH.setText(sdtkh);
+        lblVAT.setText(String.valueOf(HoaDon.getVAT()*100));
+        lcthd = g_cthd;
         fillTable();
     }
 
@@ -63,6 +67,8 @@ public class GDLapHD extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblVAT = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtMahd = new javax.swing.JTextField();
@@ -78,7 +84,7 @@ public class GDLapHD extends javax.swing.JFrame {
         btnThemHang = new javax.swing.JButton();
         btnXoaHang = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        btnXem = new javax.swing.JButton();
+        btnXacNhan = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,6 +111,10 @@ public class GDLapHD extends javax.swing.JFrame {
 
         lblTongTien.setText("0vnd");
 
+        jLabel9.setText("VAT(%):");
+
+        lblVAT.setText("5");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,6 +125,10 @@ public class GDLapHD extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblVAT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -128,7 +142,9 @@ public class GDLapHD extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(lblTongTien))
+                    .addComponent(lblTongTien)
+                    .addComponent(jLabel9)
+                    .addComponent(lblVAT))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -174,6 +190,11 @@ public class GDLapHD extends javax.swing.JFrame {
 
         btnXoaHang.setText("Xóa hàng khỏi hóa đơn");
         btnXoaHang.setEnabled(false);
+        btnXoaHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,9 +217,19 @@ public class GDLapHD extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
-        btnXem.setText("Xem");
+        btnXacNhan.setText("Xác nhận");
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
 
         btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -208,14 +239,14 @@ public class GDLapHD extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnXacNhan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(btnXem)
+                .addComponent(btnXacNhan)
                 .addGap(45, 45, 45)
                 .addComponent(btnThoat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -304,6 +335,7 @@ public class GDLapHD extends javax.swing.JFrame {
         obj.setVisible(true);
         tenkh = txtTenKH.getText();
         sdtkh = txtsdtKH.getText();
+        this.setVisible(false);
     }//GEN-LAST:event_btnThemHangActionPerformed
 
     private void txtsdtKHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsdtKHKeyTyped
@@ -311,6 +343,64 @@ public class GDLapHD extends javax.swing.JFrame {
         if ((c<'0' || c>'9')&&c!=' ')
             evt.consume();
     }//GEN-LAST:event_txtsdtKHKeyTyped
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int dig = JOptionPane.showConfirmDialog(this, "Thoát ? ", "Thoát",JOptionPane.YES_NO_OPTION);
+        if (dig == JOptionPane.YES_OPTION)
+        {
+            GDNhanVien obj = new GDNhanVien();
+            obj.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnXoaHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHangActionPerformed
+        int dig = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa? ", "Xóa khỏi danh sách mua",JOptionPane.YES_NO_OPTION);
+        if (dig==JOptionPane.YES_OPTION)
+        {
+            int n = tblDsMua.getSelectedRow();
+            g_cthd.remove(n);
+            lcthd = g_cthd;
+            fillTable();
+        }
+    }//GEN-LAST:event_btnXoaHangActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        int dig = JOptionPane.showConfirmDialog(this, "Xác nhận lập hóa đơn","Lập hóa đơn",JOptionPane.YES_NO_OPTION);
+        if (dig==JOptionPane.YES_OPTION)
+        {
+            HoaDon hd = new HoaDon();
+            hd.setCthd(lcthd);
+            hd.setManv(nv.getMaNV());
+            hd.setMahd(txtMahd.getText());
+            hd.setNgay(txtNgay.getText());
+            hd.setSdtkh(sdtkh);
+            hd.setTenkhachhang(tenkh);
+            String tt = lblTongTien.getText();
+            hd.setTongtien(Integer.parseInt(tt.substring(0,tt.length()-3)));
+            Dao_HoaDon dao = new Dao_HoaDon();
+            for (CTHoaDon cthd: lcthd){
+                cthd.setMahd(txtMahd.getText());
+            }
+            try {
+                dao.ThemHD(hd);
+                for (CTHoaDon cthd: lcthd){
+                    
+                    dao.ThemCTHD(cthd);
+                }
+            } catch (Exception ex) {
+               JOptionPane.showMessageDialog(this, "Lỗi SQL DAO_HOADON", "SQL ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            Dao_SanPham daosp = new Dao_SanPham();
+            if (daosp.CapnhatSPtheoHD(txtMahd.getText()))
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            GDNhanVien obj = new GDNhanVien();
+            obj.setVisible(true);
+        }
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,7 +440,7 @@ public class GDLapHD extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThemHang;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JButton btnXem;
+    private javax.swing.JButton btnXacNhan;
     private javax.swing.JButton btnXoaHang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -360,11 +450,13 @@ public class GDLapHD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTongTien;
+    private javax.swing.JLabel lblVAT;
     private javax.swing.JTable tblDsMua;
     private javax.swing.JTextField txtMahd;
     private javax.swing.JTextField txtNgay;
@@ -404,14 +496,34 @@ public class GDLapHD extends javax.swing.JFrame {
                 cthd.getMasp(), cthd.getTensp(),cthd.getKichthuoc(), cthd.getSlban(), cthd.getTongtiensp()
             };
             model.addRow(row);
-            tongtien+=cthd.getTongtiensp();
+            tongtien+=cthd.getTongtiensp()+cthd.getTongtiensp()*HoaDon.getVAT();
             lblTongTien.setText(String.valueOf(tongtien)+"vnd");
+        }
+        if (model.getRowCount()>0)
+        {
+            btnXoaHang.setEnabled(true);
+            btnXacNhan.setEnabled(true);
+        }
+        else{
+            btnXoaHang.setEnabled(false);
+            btnXacNhan.setEnabled(false);
         }
     }
     public static void AddCTHD(CTHoaDon cthd){
-        g_cthd.add(cthd);
+        CTHoaDon extcthd = g_cthd.stream().filter(o->o.getMasp().equals(cthd.getMasp())).findFirst().orElse(null);
+        if (extcthd==null)
+            g_cthd.add(cthd);
+        else
+        {
+            int index = g_cthd.indexOf(extcthd);
+            g_cthd.set(index, cthd);
+        }
     }
     public static void resetCTHD(){
         g_cthd.clear();
+    }
+    public static List<CTHoaDon> getCTHD()
+    {
+        return g_cthd;
     }
 }

@@ -8,9 +8,31 @@
  * @author PC
  */
 public class TestClass {
-    public static int ds =1;
-    public  void in(){
-        System.out.println(ds);
-        ds = 2;
+   private int a;
+   private String s;
+
+    public TestClass() {
     }
+
+    public TestClass(int a, String s) {
+        this.a = a;
+        this.s = s;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
+    }
+   
 }

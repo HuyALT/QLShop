@@ -24,10 +24,10 @@ public class GDChonHang extends javax.swing.JFrame {
      */
     private DefaultTableModel model;
     private List<SanPham> lsp;
-    private CTHoaDon cthd;
+    private List<CTHoaDon> lcthd;
     public GDChonHang() {
+        lcthd = GDLapHD.getCTHD();
         lsp = new ArrayList<>();
-        cthd = new CTHoaDon();
         initComponents();
         initTable();
         filltable();
@@ -138,6 +138,7 @@ public class GDChonHang extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblHangHoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHangHoaMouseClicked
@@ -227,6 +228,17 @@ public class GDChonHang extends javax.swing.JFrame {
     }
     private void filltable() {
         model.setRowCount(0);
+        for (CTHoaDon cthd: lcthd)
+        {
+            SanPham sp = lsp.stream().filter(o->o.getMasp().equals(cthd.getMasp())).findFirst().orElse(null);
+            if (sp!=null)
+            {
+                int slt = sp.getSlTon();
+                int index = lsp.indexOf(sp);
+                sp.setSlTon(slt-cthd.getSlban());
+                lsp.set(index, sp);
+            }
+        }
         for (SanPham sp: lsp){
             Object[] row = new Object[]{
                 sp.getMasp(), sp.getTensp(), sp.getKichThuoc(), sp.getSlTon(), sp.getGia()

@@ -121,6 +121,10 @@
                       <Component id="jScrollPane1" alignment="0" pref="608" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblVAT" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -139,6 +143,8 @@
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTongTien" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblVAT" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="219" max="-2" attributes="0"/>
@@ -188,6 +194,16 @@
         <Component class="javax.swing.JLabel" name="lblTongTien">
           <Properties>
             <Property name="text" type="java.lang.String" value="0vnd"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="VAT(%):"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblVAT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="5"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -292,6 +308,9 @@
             <Property name="text" type="java.lang.String" value="X&#xf3;a h&#xe0;ng kh&#x1ecf;i h&#xf3;a &#x111;&#x1a1;n"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaHangActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -304,7 +323,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnThoat" alignment="1" min="-2" pref="168" max="-2" attributes="0"/>
-                      <Component id="btnXem" alignment="1" min="-2" pref="168" max="-2" attributes="0"/>
+                      <Component id="btnXacNhan" alignment="1" min="-2" pref="168" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -314,7 +333,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  <Component id="btnXem" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="btnThoat" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -323,15 +342,21 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnXem">
+        <Component class="javax.swing.JButton" name="btnXacNhan">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Xem"/>
+            <Property name="text" type="java.lang.String" value="X&#xe1;c nh&#x1ead;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXacNhanActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnThoat">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThoatActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

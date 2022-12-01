@@ -387,7 +387,7 @@ public class GDNhanVien extends javax.swing.JFrame {
             Dao_ThongBao dao = new Dao_ThongBao();
             TBmoi = dao.getTop5TB();
             } catch (Exception ex) {
-                Logger.getLogger(GDNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+               JOptionPane.showMessageDialog(this, "Lỗi SQL DAO_THONGBAO", "SQL ERROR", JOptionPane.ERROR_MESSAGE);
             }
         tblThongbao.getColumnModel().getColumn(0).setPreferredWidth(100);
         tblThongbao.getColumnModel().getColumn(1).setPreferredWidth(445);

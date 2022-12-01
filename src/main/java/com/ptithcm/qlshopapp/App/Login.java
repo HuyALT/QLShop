@@ -174,7 +174,7 @@ public class Login extends javax.swing.JFrame {
                    txtTK.setText("");
                 }
             } catch (Exception ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+               JOptionPane.showMessageDialog(this, "Lỗi SQL DAO_NHANVIEN", "SQL ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
         

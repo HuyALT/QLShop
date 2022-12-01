@@ -5,12 +5,16 @@
 package com.ptithcm.qlshopapp.DAO;
 
 import com.ptithcm.qlshopapp.ConnectDataBase.OpenConnectDataBase;
+import com.ptithcm.qlshopapp.Model.CTHoaDon;
 import com.ptithcm.qlshopapp.Model.SanPham;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,5 +55,28 @@ public class Dao_SanPham {
             }
             return lsp;
         }
+    }
+    
+    public boolean CapnhatSPtheoHD(String mahd)
+    {
+        String sql = "{call SP_CAP_NHAT_TU_HD(?)}";
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection();
+             ){
+            try (CallableStatement ctmt = con.prepareCall(sql);){
+                con.setAutoCommit(false);
+                ctmt.setString(1, mahd);
+                ctmt.execute();
+                con.commit();
+                return true;
+            }catch (Exception ex){
+                con.rollback();
+                return false;
+            }
+            
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

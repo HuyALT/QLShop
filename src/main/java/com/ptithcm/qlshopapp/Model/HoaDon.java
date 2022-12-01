@@ -19,6 +19,15 @@ public class HoaDon {
     private String sdtkh;
     private String manv;
     private List<CTHoaDon> cthd;
+    private static float VAT=0.05f;
+
+    public static float getVAT() {
+        return VAT;
+    }
+
+    public static void setVAT(float VAT) {
+        HoaDon.VAT = VAT;
+    }
 
     public HoaDon() {
         cthd = new ArrayList<>();

@@ -6,6 +6,7 @@ package com.ptithcm.qlshopapp.App.BackFrame.NhanVien;
 
 import com.ptithcm.qlshopapp.Model.CTHoaDon;
 import com.ptithcm.qlshopapp.Model.SanPham;
+import java.util.List;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -23,7 +24,9 @@ public class GDChitietHang extends javax.swing.JFrame {
     
     private SanPham sp;
     private CTHoaDon cthd;
+    private  List<CTHoaDon> lcthd;
     public GDChitietHang(SanPham sp) {
+        lcthd = GDLapHD.getCTHD();
         initComponents();
         this.sp = sp;
         cthd = new CTHoaDon();
@@ -45,7 +48,7 @@ public class GDChitietHang extends javax.swing.JFrame {
                     }
                     else
                         slmua = Integer.parseInt(txtSlmua.getText());
-                    if (slmua>sp.getSlTon()&&slmua==0)
+                    if (slmua>sp.getSlTon()||slmua==0)
                     {
                         slmua = sp.getSlTon();
                         lblLoi.setText("Số lượng không khả dụng");
@@ -54,11 +57,9 @@ public class GDChitietHang extends javax.swing.JFrame {
                     else{
                         lblLoi.setText("");
                         btnXacnhan.setEnabled(true);
-                    }
-                        
+                    }  
                     int gia = Integer.parseInt(txtgia.getText());
-                    float vat = Float.parseFloat(lblVAT.getText());
-                    txtTongtien.setText(String.valueOf((int)(slmua*gia+slmua*gia*vat)));
+                    txtTongtien.setText(String.valueOf((int)(slmua*gia)));
                 }
 
                 @Override
@@ -70,7 +71,7 @@ public class GDChitietHang extends javax.swing.JFrame {
                     } else {
                         slmua = Integer.parseInt(txtSlmua.getText());
                     }
-                    if (slmua>sp.getSlTon()&&slmua==0)
+                    if (slmua>sp.getSlTon()||slmua==0)
                     {
                         slmua = sp.getSlTon();
                         lblLoi.setText("Số lượng không khả dụng");
@@ -81,8 +82,7 @@ public class GDChitietHang extends javax.swing.JFrame {
                         btnXacnhan.setEnabled(true);
                     }
                     int gia = Integer.parseInt(txtgia.getText());
-                    float vat = Float.parseFloat(lblVAT.getText());
-                    txtTongtien.setText(String.valueOf((int)(slmua * gia + slmua * gia * vat)));
+                    txtTongtien.setText(String.valueOf((int)(slmua * gia)));
                 }
 
                 @Override
@@ -94,7 +94,8 @@ public class GDChitietHang extends javax.swing.JFrame {
                     } else {
                         slmua = Integer.parseInt(txtSlmua.getText());
                     }
-                    if (slmua>sp.getSlTon()&&slmua==0)
+                    
+                    if (slmua>sp.getSlTon()||slmua==0)
                     {
                         slmua = sp.getSlTon();
                         lblLoi.setText("Số lượng không khả dụng");
@@ -105,10 +106,14 @@ public class GDChitietHang extends javax.swing.JFrame {
                         btnXacnhan.setEnabled(true);
                     }
                     int gia = Integer.parseInt(txtgia.getText());
-                    float vat = Float.parseFloat(lblVAT.getText());
-                    txtTongtien.setText(String.valueOf((int)(slmua * gia + slmua * gia * vat)));
+                    txtTongtien.setText(String.valueOf((int)(slmua * gia)));
                 }
             });
+            CTHoaDon extCthd = lcthd.stream().filter(o->o.getMasp().equals(sp.getMasp())).findFirst().orElse(null);
+            if (extCthd!=null)
+            {
+                txtSlmua.setText(String.valueOf(extCthd.getSlban()));
+            }
         }
     }
 
@@ -138,8 +143,6 @@ public class GDChitietHang extends javax.swing.JFrame {
         txtTongtien = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtgia = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        lblVAT = new javax.swing.JLabel();
         lblLoi = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -220,16 +223,13 @@ public class GDChitietHang extends javax.swing.JFrame {
         jLabel7.setText("Tổng tiền:");
 
         txtTongtien.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTongtien.setText("0");
         txtTongtien.setFocusable(false);
 
         jLabel8.setText("Giá:");
 
         txtgia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtgia.setFocusable(false);
-
-        jLabel9.setText("VAT(%):");
-
-        lblVAT.setText("0");
 
         lblLoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLoi.setForeground(new java.awt.Color(255, 0, 0));
@@ -263,32 +263,23 @@ public class GDChitietHang extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel6))
-                                .addGap(69, 69, 69))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(72, 72, 72))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtSlton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtKichthuoc)
-                                            .addComponent(txtTensp)
-                                            .addComponent(txtMasp)
-                                            .addComponent(txtTongtien)
-                                            .addComponent(txtgia, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblVAT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtKichthuoc)
+                                        .addComponent(txtTensp)
+                                        .addComponent(txtMasp)
+                                        .addComponent(txtTongtien)
+                                        .addComponent(txtgia, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtSlmua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -328,9 +319,7 @@ public class GDChitietHang extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(lblVAT, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacnhan)
@@ -339,6 +328,7 @@ public class GDChitietHang extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTenspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenspActionPerformed
@@ -359,10 +349,10 @@ public class GDChitietHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSlmuaKeyTyped
 
     private void btnXacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacnhanActionPerformed
+        AddCTHD();
         this.setVisible(false);
         GDChonHang obj = new GDChonHang();
         obj.setVisible(true);
-        AddCTHD();
     }//GEN-LAST:event_btnXacnhanActionPerformed
 
     private void txtMaspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaspActionPerformed
@@ -438,9 +428,7 @@ public class GDChitietHang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblLoi;
-    private javax.swing.JLabel lblVAT;
     private javax.swing.JTextField txtKichthuoc;
     private javax.swing.JTextField txtMasp;
     private javax.swing.JTextField txtSlmua;

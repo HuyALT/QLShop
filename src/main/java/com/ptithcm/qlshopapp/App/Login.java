@@ -5,6 +5,7 @@
 package com.ptithcm.qlshopapp.App;
 
 import com.ptithcm.qlshopapp.App.BackFrame.NhanVien.GDNhanVien;
+import com.ptithcm.qlshopapp.App.BackFrame.QuanLy.GDQuanLy;
 import com.ptithcm.qlshopapp.DAO.Dao_Login;
 import com.ptithcm.qlshopapp.Model.NhanVien;
 import java.util.logging.Level;
@@ -43,8 +44,9 @@ public class Login extends javax.swing.JFrame {
         btnThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(51, 51, 255));
+        setBackground(new java.awt.Color(255, 255, 102));
 
+        jLabel1.setBackground(new java.awt.Color(153, 255, 153));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -163,9 +165,17 @@ public class Login extends javax.swing.JFrame {
                 NhanVien nv = Dao_Login.CheckLogin(sTK, sMK);
                 if (nv!=null&&!nv.isDaNghi())
                 {
-                    GDNhanVien obj = new GDNhanVien();
-                    obj.setVisible(true);
-                    this.setVisible(false);
+                    if(nv.getChucVu().compareTo("NHÂN VIÊN")==0){
+                        GDNhanVien obj = new GDNhanVien();
+                        obj.setVisible(true);
+                        this.setVisible(false);
+                    }
+                    else
+                    {
+                        GDQuanLy obj = new GDQuanLy();
+                        obj.setVisible(true);
+                        this.setVisible(false);
+                    }
                 }
                 else
                 {

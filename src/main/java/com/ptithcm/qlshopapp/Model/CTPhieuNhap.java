@@ -14,6 +14,24 @@ public class CTPhieuNhap {
     private String tensp;
     private int sl;
     private int gia;
+    private String kichthuoc;
+
+    public String getKichthuoc() {
+        return kichthuoc;
+    }
+
+    public void setKichthuoc(String kichthuoc) {
+        this.kichthuoc = kichthuoc;
+    }
+
+    public CTPhieuNhap(String mapn, String masp, String tensp, int sl, int gia, String kichthuoc) {
+        this.mapn = mapn;
+        this.masp = masp;
+        this.tensp = tensp;
+        this.sl = sl;
+        this.gia = gia;
+        this.kichthuoc = kichthuoc;
+    }
 
     public CTPhieuNhap() {
     }
@@ -24,15 +42,6 @@ public class CTPhieuNhap {
 
     public void setTensp(String tensp) {
         this.tensp = tensp;
-    }
-
-
-    public CTPhieuNhap(String mapn, String masp, String tensp, int sl, int gia) {
-        this.mapn = mapn;
-        this.masp = masp;
-        this.tensp = tensp;
-        this.sl = sl;
-        this.gia = gia;
     }
 
     public String getMapn() {

@@ -33,7 +33,7 @@ public class Dao_PhieuNhap {
     }
     
     public boolean ThemCTPN(CTPhieuNhap ctpn) throws Exception {
-        String sql = "INSERT INTO CTPHIEUNHAP(MAPN, MASP, TENSANPHAM, SOLUONG, GIA";
+        String sql = "INSERT INTO CTPHIEUNHAP(MAPN, MASP, TENSANPHAM, SOLUONG, GIA, KICHTHUOC) VALUES(?,?,?,?,?,?)";
         try (
                 Connection con = OpenConnectDataBase.OpenConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);){
@@ -42,6 +42,7 @@ public class Dao_PhieuNhap {
             pstm.setString(3, ctpn.getTensp());
             pstm.setInt(4, ctpn.getSl());
             pstm.setInt(5, ctpn.getGia());
+            pstm.setString(6, ctpn.getKichthuoc());
             
             return pstm.executeUpdate()>0;
         }
@@ -61,6 +62,7 @@ public class Dao_PhieuNhap {
                     ctpn.setTensp(rs.getString("TENSANPHAM"));
                     ctpn.setSl(rs.getInt("SOLUONG"));
                     ctpn.setGia(rs.getInt("GIA"));
+                    ctpn.setKichthuoc(rs.getString("KICHTHUOC"));
                     lctpn.add(ctpn);
                 }
             }
@@ -89,6 +91,7 @@ public class Dao_PhieuNhap {
         }
         return lpn;
     }
+    
 }
 
     

@@ -343,7 +343,6 @@ public class GDLapHD extends javax.swing.JFrame {
         if ((c<'0' || c>'9')&&c!=' ')
             evt.consume();
     }//GEN-LAST:event_txtsdtKHKeyTyped
-
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         int dig = JOptionPane.showConfirmDialog(this, "Thoát ? ", "Thoát",JOptionPane.YES_NO_OPTION);
         if (dig == JOptionPane.YES_OPTION)
@@ -393,7 +392,10 @@ public class GDLapHD extends javax.swing.JFrame {
             }
             Dao_SanPham daosp = new Dao_SanPham();
             if (daosp.CapnhatSPtheoHD(txtMahd.getText()))
+            {
+                resetCTHD();
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            }
             else
                 JOptionPane.showMessageDialog(this, "Cập nhật thất bại", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
@@ -521,6 +523,8 @@ public class GDLapHD extends javax.swing.JFrame {
     }
     public static void resetCTHD(){
         g_cthd.clear();
+        tenkh = "";
+        sdtkh = "";
     }
     public static List<CTHoaDon> getCTHD()
     {

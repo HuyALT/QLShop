@@ -213,6 +213,7 @@ public class GDDoiTKMK extends javax.swing.JFrame {
             }
         });
 
+        txtpwmoi.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtpwmoi.setEnabled(false);
 
         txtpwxacnhan.setEnabled(false);

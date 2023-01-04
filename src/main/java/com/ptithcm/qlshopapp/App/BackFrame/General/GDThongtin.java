@@ -6,6 +6,7 @@ package com.ptithcm.qlshopapp.App.BackFrame.General;
 
 import com.ptithcm.qlshopapp.App.BackFrame.General.GDDoiTKMK;
 import com.ptithcm.qlshopapp.App.BackFrame.NhanVien.GDNhanVien;
+import com.ptithcm.qlshopapp.App.BackFrame.QuanLy.GDQuanLy;
 import com.ptithcm.qlshopapp.App.Login;
 import com.ptithcm.qlshopapp.DAO.Dao_Login;
 import com.ptithcm.qlshopapp.Model.NhanVien;
@@ -177,9 +178,16 @@ public class GDThongtin extends javax.swing.JFrame {
         int n = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát? ", "Thoát",JOptionPane.YES_NO_OPTION);
         if (n==JOptionPane.YES_OPTION)
         {
-            this.setVisible(false);
-            GDNhanVien obj = new GDNhanVien();
-            obj.setVisible(true);
+            if (nv.getChucVu().compareTo("NHÂN VIÊN") == 0) {
+                this.setVisible(false);
+                GDNhanVien obj = new GDNhanVien();
+                obj.setVisible(true);
+            } else {
+                this.setVisible(false);
+                GDQuanLy obj = new GDQuanLy() ;
+                obj.setVisible(true);
+            }
+            
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 

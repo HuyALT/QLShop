@@ -56,6 +56,27 @@ public class Dao_SanPham {
             return lsp;
         }
     }
+    public List<SanPham> getListSP() throws Exception {
+        List<SanPham> lsp = new ArrayList<>();
+        String sql = "Select * from SANPHAM";
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();){
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMasp(rs.getString("MA"));
+                sp.setTensp(rs.getString("TEN"));
+                sp.setSlTon(rs.getInt("SLTON"));
+                sp.setGia(rs.getInt("GIA"));
+                sp.setKichThuoc(rs.getString("KICHTHUOC"));
+                if(sp.getSlTon() != 0) {
+                     lsp.add(sp);
+                }
+            }
+            return lsp;
+        }
+    }
     
     public boolean CapnhatSPtheoHD(String mahd)
     {
@@ -78,5 +99,48 @@ public class Dao_SanPham {
             ex.printStackTrace();
         }
         return false;
+    }
+    public List<SanPham> SapXepSP(int selec) throws Exception{
+         List<SanPham> lsp = new ArrayList<>();
+         String sql ;
+         if (selec == 1) {
+             sql = "Select* FROM SANPHAM ORDER BY TEN ASC" ;
+         } else if (selec == 2) {
+             sql = "Select* FROM SANPHAM ORDER BY KICHTHUOC ASC" ;
+         } else if (selec == 3) {
+             sql = "Select* FROM SANPHAM ORDER BY SLTON ASC" ;
+         } else {
+             sql = "Select* FROM SANPHAM ORDER BY GIA ASC" ;
+         }
+         try(
+                 Connection con = OpenConnectDataBase.OpenConnection() ;
+                 PreparedStatement pstm = con.prepareStatement(sql) ;
+                 ResultSet rs = pstm.executeQuery() ;
+                 ){
+             while(rs.next()) {
+                     SanPham sp = new SanPham() ;
+                     sp.setMasp(rs.getString("MA"));
+                     sp.setTensp(rs.getString("TEN"));
+                     sp.setSlTon(rs.getInt("SLTON"));
+                     sp.setGia(rs.getInt("GIA"));
+                     sp.setKichThuoc(rs.getString("KICHTHUOC"));
+                     if(sp.getSlTon() != 0) {
+                         lsp.add(sp) ;
+                     }
+                 }
+             return lsp ;
+         }
+    }
+    public boolean XoaSanPham(String maSP) throws  Exception{
+        String sql = "Update SANPHAM SET SLTON=0 WHERE MA=?" ;
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection() ;
+                PreparedStatement pstm = con.prepareStatement(sql );
+            ){
+             
+                pstm.setString(1, maSP);
+  
+                return pstm.executeUpdate() > 0 ;
+        } 
     }
 }

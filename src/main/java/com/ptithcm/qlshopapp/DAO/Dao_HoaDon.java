@@ -6,6 +6,7 @@ package com.ptithcm.qlshopapp.DAO;
 
 import com.ptithcm.qlshopapp.ConnectDataBase.OpenConnectDataBase;
 import com.ptithcm.qlshopapp.Model.CTHoaDon;
+import com.ptithcm.qlshopapp.Model.DoanhThuThang;
 import com.ptithcm.qlshopapp.Model.HoaDon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,8 @@ public class Dao_HoaDon {
     public boolean ThemHD(HoaDon hd) throws Exception {
         String sql = "INSERT INTO HOADON(MAHD, NGAY, TONGTIEN, TENKHACHHANG, SDTKH, MANV) VALUES(?,?,?,?,?,?)";
         try (
-                 Connection con = OpenConnectDataBase.OpenConnection();  PreparedStatement pstm = con.prepareStatement(sql);) {
+                 Connection con = OpenConnectDataBase.OpenConnection();
+                 PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setString(1, hd.getMahd());
             pstm.setString(2, hd.getNgay());
             pstm.setInt(3, hd.getTongtien());
@@ -92,5 +94,75 @@ public class Dao_HoaDon {
             return lhd;
         }
     }
-
+    public  List<HoaDon> getListHDDoanhTHu() throws Exception{
+        List<HoaDon> lhd = new ArrayList<>() ;
+        List<CTHoaDon> lcthd = new ArrayList<>() ;
+        String sql = "SELECT * FROM HOADON ORDER BY TONGTIEN DESC ";
+        try(
+               Connection con = OpenConnectDataBase.OpenConnection() ;
+               PreparedStatement pstm = con.prepareStatement(sql);
+               ResultSet rs = pstm.executeQuery() ;
+                ){
+            while(rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMahd(rs.getString("MAHD"));
+                hd.setNgay(rs.getString("NGAY"));
+                hd.setTongtien(rs.getInt("TONGTIEN"));
+                hd.setTenkhachhang(rs.getString("TENKHACHHANG"));
+                hd.setSdtkh(rs.getString("SDTKH"));
+                hd.setManv(rs.getString("MANV"));
+                lcthd = getCTHoaDons(hd);
+                hd.setCthd(lcthd);
+                lhd.add(hd);
+            }
+            return lhd ;
+        }
+    }
+    public  List<HoaDon> getListHDDate() throws Exception{
+        List<HoaDon> lhd = new ArrayList<>() ;
+        List<CTHoaDon> lcthd = new ArrayList<>() ;
+        String sql = "SELECT * FROM HOADON ORDER BY NGAY DESC ";
+        try(
+               Connection con = OpenConnectDataBase.OpenConnection() ;
+               PreparedStatement pstm = con.prepareStatement(sql);
+               ResultSet rs = pstm.executeQuery() ;
+                ){
+            while(rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMahd(rs.getString("MAHD"));
+                hd.setNgay(rs.getString("NGAY"));
+                hd.setTongtien(rs.getInt("TONGTIEN"));
+                hd.setTenkhachhang(rs.getString("TENKHACHHANG"));
+                hd.setSdtkh(rs.getString("SDTKH"));
+                hd.setManv(rs.getString("MANV"));
+                lcthd = getCTHoaDons(hd);
+                hd.setCthd(lcthd);
+                lhd.add(hd);
+            }
+            return lhd ;
+        }
+    }
+    public List<DoanhThuThang> getListDoanhThuThangs(String y) throws Exception{
+        List<DoanhThuThang> ldtt = new  ArrayList<>() ;
+        String sql = "SELECT THANG = MONTH(NGAY), TONGTIEN = SUM(TONGTIEN) FROM HOADON WHERE YEAR(NGAY) =? GROUP BY MONTH(NGAY)" ;
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection() ;
+                PreparedStatement pstm = con.prepareStatement(sql) ;
+                
+                ) {
+            pstm.setString(1, y);
+            try(
+                    ResultSet rs = pstm.executeQuery() ;
+                    ) {
+                while(rs.next()) {
+                    DoanhThuThang dtt = new DoanhThuThang() ;
+                    dtt.setThang(rs.getString("THANG"));
+                    dtt.setTongtien(rs.getInt("TONGTIEN"));
+                    ldtt.add(dtt) ;
+                }
+                return ldtt ;
+            }
+            
+        }
+    }
 }

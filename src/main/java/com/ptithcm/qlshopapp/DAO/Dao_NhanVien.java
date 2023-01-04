@@ -38,6 +38,30 @@ public class Dao_NhanVien {
     
     public List<NhanVien> getAllNV() throws Exception {
         List<NhanVien> lnv = new ArrayList<>();
+        String sql = "Select * from NHANVIEN";
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery();)
+        {
+            while (rs.next()){
+                NhanVien nv = new NhanVien();
+                nv.setMaNV(rs.getString("MANV"));
+                nv.setTenNV(rs.getString("TENNV"));
+                nv.setGioiTinh(rs.getString("GIOITINH"));
+                nv.setCmnd(rs.getString("CMND"));
+                nv.setNgaySinh(rs.getString("NGAYSINH"));
+                nv.setChucVu(rs.getString("CHUCVU"));
+                nv.setTenTK(rs.getString("TENTAIKHOAN"));
+                nv.setMkhau(rs.getString("MATKHAU"));
+                nv.setDaNghi(rs.getBoolean("DANGHI"));
+                lnv.add(nv);
+            }
+            return lnv;
+        }
+    }
+    public List<NhanVien> getNVonline() throws Exception {
+        List<NhanVien> lnv = new ArrayList<>();
         String sql = "Select * from NHANVIEN WHERE DANGHI=0";
         try (
                 Connection con = OpenConnectDataBase.OpenConnection();
@@ -71,5 +95,35 @@ public class Dao_NhanVien {
             pstm.setString(3, nv.getMaNV());
             return pstm.executeUpdate()>0;
         }
+    }
+    public boolean UpdateNV(NhanVien nv ) throws Exception{
+        String sql = "Update NHANVIEN SET TENNV=?,GIOITINH=?,CMND=?,NGAYSINH=?,CHUCVU=?,TENTAIKHOAN=?,MATKHAU=? WHERE MANV=?";
+        try(
+                Connection con = OpenConnectDataBase.OpenConnection() ;
+                PreparedStatement pstm = con.prepareStatement(sql) ;
+                ){
+            pstm.setString(1, nv.getTenNV());
+            pstm.setString(2, nv.getGioiTinh());
+            pstm.setString(3, nv.getCmnd());
+            pstm.setString(4, nv.getNgaySinh());
+            pstm.setString(5, nv.getChucVu());
+            pstm.setString(6, nv.getTenTK());
+            pstm.setString(7, nv.getMkhau());
+            pstm.setString(8, nv.getMaNV());
+            
+            return  pstm.executeUpdate() > 0 ;
+        }
+    }
+    public boolean XaThaiNV(String manv) throws Exception{
+        String sql = "Update NHANVIEN SET DANGHI=1 WHERE MANV=?" ;
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection() ;
+                PreparedStatement pstm = con.prepareStatement(sql );
+            ){
+             
+                pstm.setString(1, manv);
+  
+                return pstm.executeUpdate() > 0 ;
+        } 
     }
 }

@@ -4,6 +4,9 @@
  */
 package com.ptithcm.qlshopapp.Model;
 
+import java.math.BigDecimal;
+
+
 /**
  *
  * @author PC

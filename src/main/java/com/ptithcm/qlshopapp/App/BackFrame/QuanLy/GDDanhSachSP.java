@@ -11,7 +11,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -24,13 +29,43 @@ public class GDDanhSachSP extends javax.swing.JFrame {
      */
     private List<SanPham> lsp ;
     DefaultTableModel model  ;
+    private TableRowSorter<TableModel> RowSorter;
     public GDDanhSachSP() {
         initComponents();
         btnXoaSP.setEnabled(false);
         this.setLocation(700, 100);
         initTable() ;
         fillTable() ;
-        
+        this.RowSorter = new TableRowSorter<>(tblDSSP.getModel());
+        tblDSSP.setRowSorter(RowSorter);
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+        });
     }
 
     /**

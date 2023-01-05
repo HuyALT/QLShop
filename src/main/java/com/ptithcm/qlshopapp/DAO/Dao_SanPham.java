@@ -6,6 +6,7 @@ package com.ptithcm.qlshopapp.DAO;
 
 import com.ptithcm.qlshopapp.ConnectDataBase.OpenConnectDataBase;
 import com.ptithcm.qlshopapp.Model.CTHoaDon;
+import com.ptithcm.qlshopapp.Model.CTPhieuNhap;
 import com.ptithcm.qlshopapp.Model.SanPham;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -100,6 +101,48 @@ public class Dao_SanPham {
         }
         return false;
     }
+    //PHIEU NHAP
+    public boolean CapnhatSPsanco(CTPhieuNhap ctpn) throws Exception
+    {
+        String sql = "UPDATE SANPHAM SET SLTON = SLTON+? WHERE MA = ?";
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);) {
+            pstm.setInt(1, ctpn.getSl());
+            pstm.setString(2, ctpn.getMasp());
+            
+            return pstm.executeUpdate()>0;
+        }
+    }
+    public boolean ThemMoiSP(CTPhieuNhap ctpn) throws Exception
+    {
+        List<SanPham> lsp = getAllSP();
+        int sosp = lsp.size()+1;
+        String masp = "SP" + String.format("%03d", sosp);
+        SanPham sp = new SanPham();
+        sp.setMasp(masp);
+        sp.setSlTon(ctpn.getSl());
+        sp.setGia(ctpn.getGia());
+        sp.setKichThuoc(ctpn.getKichthuoc());
+        sp.setTensp(ctpn.getTensp());
+        return ThemSP(sp);
+    }
+    public boolean KiemTraSPtontai(CTPhieuNhap ctpn) throws Exception
+    {
+        String sql = "Select MA From SANPHAM Where TEN = ? and GIA = ? and KICHTHUOC = ?";
+        try (
+                Connection con = OpenConnectDataBase.OpenConnection();
+                PreparedStatement pstm = con.prepareStatement(sql);) {
+            pstm.setString(1, ctpn.getTensp());
+            pstm.setInt(2, ctpn.getGia());
+            pstm.setString(3, ctpn.getKichthuoc());
+            try (ResultSet rs = pstm.executeQuery();) {
+                return rs.next();
+            }
+            
+        }
+    }
+    //LOC
     public List<SanPham> SapXepSP(int selec) throws Exception{
          List<SanPham> lsp = new ArrayList<>();
          String sql ;

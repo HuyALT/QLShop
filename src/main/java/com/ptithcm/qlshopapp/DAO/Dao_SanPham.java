@@ -102,40 +102,34 @@ public class Dao_SanPham {
         return false;
     }
     //PHIEU NHAP
-    public boolean CapnhatSPsanco(CTPhieuNhap ctpn) throws Exception
+    public boolean CapnhatSPsanco(SanPham sp) throws Exception
     {
         String sql = "UPDATE SANPHAM SET SLTON = SLTON+? WHERE MA = ?";
         try (
                 Connection con = OpenConnectDataBase.OpenConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);) {
-            pstm.setInt(1, ctpn.getSl());
-            pstm.setString(2, ctpn.getMasp());
+            pstm.setInt(1, sp.getSlTon());
+            pstm.setString(2, sp.getMasp());
             
             return pstm.executeUpdate()>0;
         }
     }
-    public boolean ThemMoiSP(CTPhieuNhap ctpn) throws Exception
+    public String TaoMaSPnew() throws Exception
     {
         List<SanPham> lsp = getAllSP();
         int sosp = lsp.size()+1;
         String masp = "SP" + String.format("%03d", sosp);
-        SanPham sp = new SanPham();
-        sp.setMasp(masp);
-        sp.setSlTon(ctpn.getSl());
-        sp.setGia(ctpn.getGia());
-        sp.setKichThuoc(ctpn.getKichthuoc());
-        sp.setTensp(ctpn.getTensp());
-        return ThemSP(sp);
+        return masp ;
     }
-    public boolean KiemTraSPtontai(CTPhieuNhap ctpn) throws Exception
+    public boolean KiemTraSPtontai(SanPham sp) throws Exception
     {
         String sql = "Select MA From SANPHAM Where TEN = ? and GIA = ? and KICHTHUOC = ?";
         try (
                 Connection con = OpenConnectDataBase.OpenConnection();
                 PreparedStatement pstm = con.prepareStatement(sql);) {
-            pstm.setString(1, ctpn.getTensp());
-            pstm.setInt(2, ctpn.getGia());
-            pstm.setString(3, ctpn.getKichthuoc());
+            pstm.setString(1, sp.getTensp());
+            pstm.setInt(2, sp.getGia());
+            pstm.setString(3, sp.getKichThuoc());
             try (ResultSet rs = pstm.executeQuery();) {
                 return rs.next();
             }

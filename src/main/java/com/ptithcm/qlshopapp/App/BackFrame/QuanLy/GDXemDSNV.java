@@ -285,10 +285,12 @@ public class GDXemDSNV extends javax.swing.JFrame {
         }
        model.setRowCount(0);
        for(NhanVien nv : lnv) {
-           Object[] row = new Object[]{
+           if (nv.getChucVu().compareTo("QUẢN LÝ") != 0) {
+               Object[] row = new Object[]{
                nv.getMaNV() , nv.getTenNV() , nv.getGioiTinh() , nv.getChucVu()
-           };
-           model.addRow(row);
+               };
+               model.addRow(row);    
+           }
        }
     }
 }

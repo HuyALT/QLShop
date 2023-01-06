@@ -174,6 +174,11 @@ public class GDQuanLy extends javax.swing.JFrame {
         });
 
         btnLapPhieuNhan.setText("Lập phiếu nhập ");
+        btnLapPhieuNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLapPhieuNhanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -307,6 +312,13 @@ public class GDQuanLy extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnLapPhieuNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLapPhieuNhanActionPerformed
+        GDPhieuNhapSP obj = new GDPhieuNhapSP() ;
+        obj.setVisible(true);
+        this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLapPhieuNhanActionPerformed
 
     /**
      * @param args the command line arguments

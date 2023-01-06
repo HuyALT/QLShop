@@ -152,7 +152,6 @@ public class GDLapHD extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/invoice-icon.png"))); // NOI18N
         jLabel1.setText("   HÓA ĐƠN");
@@ -184,6 +183,9 @@ public class GDLapHD extends javax.swing.JFrame {
 
         txtTenNV.setFocusable(false);
 
+        jPanel2.setBackground(new java.awt.Color(0, 255, 204));
+
+        btnThemHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add-icon.png"))); // NOI18N
         btnThemHang.setText("Thêm hàng vào hóa đơn");
         btnThemHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +193,7 @@ public class GDLapHD extends javax.swing.JFrame {
             }
         });
 
+        btnXoaHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Alarm-Minus-icon.png"))); // NOI18N
         btnXoaHang.setText("Xóa hàng khỏi hóa đơn");
         btnXoaHang.setEnabled(false);
         btnXoaHang.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +223,9 @@ public class GDLapHD extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
+        jPanel3.setBackground(new java.awt.Color(51, 255, 51));
+
+        btnXacNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Accept-icon.png"))); // NOI18N
         btnXacNhan.setText("Xác nhận");
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,6 +233,7 @@ public class GDLapHD extends javax.swing.JFrame {
             }
         });
 
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Actions-window-close-icon.png"))); // NOI18N
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,19 +247,21 @@ public class GDLapHD extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXacNhan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(btnXacNhan)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(btnThoat)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -114,6 +114,12 @@ public class GDDanhSachSP extends javax.swing.JFrame {
 
         jLabel2.setText("Tìm kiếm:");
 
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
         tblDSSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -275,6 +281,12 @@ public class GDDanhSachSP extends javax.swing.JFrame {
         btnXoaSP.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_tblDSSPMouseClicked
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        int position = txtTimKiem.getCaretPosition();
+        txtTimKiem.setText(txtTimKiem.getText().toUpperCase());
+        txtTimKiem.setCaretPosition(position);
+    }//GEN-LAST:event_txtTimKiemKeyReleased
 
     /**
      * @param args the command line arguments

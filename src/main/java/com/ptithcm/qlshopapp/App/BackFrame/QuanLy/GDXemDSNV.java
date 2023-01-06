@@ -11,8 +11,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -25,6 +29,7 @@ public class GDXemDSNV extends javax.swing.JFrame {
      */
     List<NhanVien> lnv;
     DefaultTableModel model;
+    private TableRowSorter<TableModel> RowSorter;
     public GDXemDSNV() {
         initComponents();
         btnSuaNV.setEnabled(false);
@@ -33,7 +38,36 @@ public class GDXemDSNV extends javax.swing.JFrame {
         initTable();
         lnv = new ArrayList<>() ;
         fillTable() ;
-        
+        this.RowSorter = new TableRowSorter<>(tblDSNV.getModel());
+        tblDSNV.setRowSorter(RowSorter);
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+        });
     }
 
     /**
@@ -53,6 +87,8 @@ public class GDXemDSNV extends javax.swing.JFrame {
         btnThemNV = new javax.swing.JButton();
         btnXaThaiNV = new javax.swing.JButton();
         btnSuaNV = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +166,14 @@ public class GDXemDSNV extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Tìm kiếm:");
+
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,22 +190,33 @@ public class GDXemDSNV extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXaThaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemNV, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSuaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(btnThoat)
                 .addGap(28, 28, 28))
         );
@@ -218,6 +273,12 @@ public class GDXemDSNV extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSuaNVActionPerformed
 
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+       int position = txtTimKiem.getCaretPosition();
+       txtTimKiem.setText(txtTimKiem.getText().toUpperCase());
+       txtTimKiem.setCaretPosition(position);
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -259,9 +320,11 @@ public class GDXemDSNV extends javax.swing.JFrame {
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXaThaiNV;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDSNV;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
     private void initTable() {

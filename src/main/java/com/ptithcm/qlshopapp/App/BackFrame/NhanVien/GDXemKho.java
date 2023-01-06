@@ -12,7 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -25,6 +30,7 @@ public class GDXemKho extends javax.swing.JFrame {
      */
     List<SanPham> lsp;
     DefaultTableModel model;
+    private TableRowSorter<TableModel> RowSorter;
     public GDXemKho() {
         initComponents();
         initTable();
@@ -36,6 +42,36 @@ public class GDXemKho extends javax.swing.JFrame {
             Logger.getLogger(GDXemKho.class.getName()).log(Level.SEVERE, null, ex);
         }
        fillTable();
+       this.RowSorter = new TableRowSorter<>(tblXemkho.getModel());
+        tblXemkho.setRowSorter(RowSorter);
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (txtTimKiem.getText().trim().length() == 0) {
+                    RowSorter.setRowFilter(null);
+                } else {
+                    RowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtTimKiem.getText().trim()));
+                }
+            }
+        });
     }
 
     /**
@@ -51,6 +87,8 @@ public class GDXemKho extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblXemkho = new javax.swing.JTable();
         btnThoat = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -86,6 +124,14 @@ public class GDXemKho extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Tìm kiếm:");
+
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,12 +141,22 @@ public class GDXemKho extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,6 +212,12 @@ public class GDXemKho extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        int position = txtTimKiem.getCaretPosition();
+        txtTimKiem.setText(txtTimKiem.getText().toUpperCase());
+        txtTimKiem.setCaretPosition(position);
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -194,10 +256,12 @@ public class GDXemKho extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblXemkho;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
     private void initTable() {

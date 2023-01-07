@@ -162,7 +162,7 @@ public class GDTaoTB extends javax.swing.JFrame {
             tb.setNgay(lblNgay.getText());
             Dao_ThongBao dao = new Dao_ThongBao() ;
             try {
-                dao.UpDateTB(tb) ;
+                dao.ThemTB(tb) ;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Lỗi SQL DAO_HOADON", "SQL ERROR", JOptionPane.ERROR_MESSAGE);
             }

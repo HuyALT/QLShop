@@ -65,19 +65,7 @@ public class Dao_ThongBao {
             return ltb;
         }
     }
-    public boolean UpDateTB(ThongBao tb) throws Exception{
-        String sql = "INSERT INTO THONGBAO(MATB,NOIDUNG,NGAY) VALUES(?,?,?)" ;
-        try(
-            Connection con = OpenConnectDataBase.OpenConnection();
-            PreparedStatement pstm = con.prepareStatement(sql) ;
-        ){
-           pstm.setString(1, tb.getMatb());
-           pstm.setString(2, tb.getNoidung());
-           pstm.setString(3, tb.getNgay());
-           
-           return pstm.executeUpdate() > 0 ;
-        } 
-    }
+
     public boolean fixTB(ThongBao tb ) throws  Exception {
         String sql = "Update THONGBAO SET NOIDUNG=? WHERE MATB=?" ;
         try (

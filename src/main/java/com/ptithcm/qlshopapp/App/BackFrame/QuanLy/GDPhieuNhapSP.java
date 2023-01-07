@@ -290,10 +290,13 @@ public class GDPhieuNhapSP extends javax.swing.JFrame {
         if(dig == JOptionPane.YES_OPTION) {
             int n = tblDSSPmua.getSelectedRow() ;
             CTPhieuNhap ctpnnew =g_ctpn.get(n);
-            tongtien -= ctpnnew.getGia()*ctpnnew.getSl() ;
-            txtTongTien.setText(String.valueOf(tongtien));
             g_ctpn.remove(n) ;
             lctpn = g_ctpn ;
+            int sum = 0;
+            for (CTPhieuNhap ctpnsum : g_ctpn) {
+                sum += ctpnsum.getSl()*ctpnsum.getGia() ;
+            }
+            txtTongTien.setText(String.valueOf(sum) + "vnđ");
             if(g_ctpn.isEmpty()) {
                 btnXacNhan.setEnabled(false);
                 btnSuaSanPham.setEnabled(false);
@@ -482,14 +485,14 @@ public class GDPhieuNhapSP extends javax.swing.JFrame {
         g_ctpn.set(n, ctpnFix) ;
         DefaultTableModel models = (DefaultTableModel) tblDSSPmua.getModel() ;
         models.setRowCount(0);
-        int TongTien = 0 ;
+        int sum = 0 ;
         for(CTPhieuNhap ctpn : g_ctpn) {
            Object[] row = new Object[]{
                 ctpn.getTensp() , ctpn.getSl() , ctpn.getGia() , ctpn.getKichthuoc() 
            };
            models.addRow(row);
-           TongTien += ctpn.getSl()*ctpn.getGia() ;
-           txtTongTien.setText(String.valueOf(TongTien) + "vnđ");
+           sum += ctpn.getSl()*ctpn.getGia() ;
+           txtTongTien.setText(String.valueOf(sum) + "vnđ");
        }
        
     }
@@ -503,9 +506,9 @@ public class GDPhieuNhapSP extends javax.swing.JFrame {
     public static void addCTPN(CTPhieuNhap ctpn) {
         g_ctpn.add(ctpn) ;
         tongtien += ctpn.getGia()*ctpn.getSl() ;
-        txtTongTien.setText(String.valueOf(tongtien));
+        txtTongTien.setText(String.valueOf(tongtien)+"vnđ");
     }
-    public static void resetCTPN(){
+    private void resetCTPN(){
         g_ctpn.clear();
         tongtien = 0 ;
     }

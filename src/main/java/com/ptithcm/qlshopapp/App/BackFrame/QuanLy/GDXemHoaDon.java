@@ -48,7 +48,7 @@ public class GDXemHoaDon extends javax.swing.JFrame {
         btnSXDoanhThu = new javax.swing.JButton();
         btnSXTheoNgay = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btndsMĐ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,10 +110,10 @@ public class GDXemHoaDon extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Mặc định");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btndsMĐ.setText("Mặc định");
+        btndsMĐ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btndsMĐActionPerformed(evt);
             }
         });
 
@@ -127,7 +127,7 @@ public class GDXemHoaDon extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(btnSXDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btndsMĐ, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSXTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
@@ -147,7 +147,7 @@ public class GDXemHoaDon extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSXDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSXTheoNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btndsMĐ, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -191,10 +191,10 @@ public class GDXemHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSXDoanhThuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btndsMĐActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndsMĐActionPerformed
         fillButton(lhd);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btndsMĐActionPerformed
 
     private void btnSXTheoNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSXTheoNgayActionPerformed
         List<HoaDon> sLHD = new ArrayList<>() ;
@@ -247,7 +247,7 @@ public class GDXemHoaDon extends javax.swing.JFrame {
     private javax.swing.JButton btnSXDoanhThu;
     private javax.swing.JButton btnSXTheoNgay;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btndsMĐ;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

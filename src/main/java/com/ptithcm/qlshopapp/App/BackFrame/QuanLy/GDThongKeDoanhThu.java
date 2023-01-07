@@ -194,7 +194,7 @@ public class GDThongKeDoanhThu extends javax.swing.JFrame {
              }
             model = (DefaultTableModel) tblThongKe.getModel() ;
             model.setColumnIdentifiers(new Object[] {
-                "Năm","Tổng Tiền"
+                "Tháng","Tổng Tiền"
             });
             model.setRowCount(0);  
             for (DoanhThuThang dt : ldtt) {

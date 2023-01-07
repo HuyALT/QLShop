@@ -61,27 +61,33 @@ public class GDSuaNV extends javax.swing.JFrame {
             txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                   if (txtTenNV.getText().length() == 0) {
-                       btnXN.setEnabled(false);
-                   } else {
-                       btnXN.setEnabled(true);
-                   }
+                    if (txtTenNV.getText().length() == 0) {
+                    btnXN.setEnabled(false);
+                    } else if (txtCMND.getText().length() == 0 || txtTKNV.getText().length() == 0 || txtMKNV.getText().length() ==0) {
+                        btnXN.setEnabled(false);
+                    } else {
+                        btnXN.setEnabled(true);
+                    }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    if (txtTenNV.getText().length() == 0) {
-                       btnXN.setEnabled(false);
-                   } else {
+                     if (txtTenNV.getText().length() == 0) {
+                    btnXN.setEnabled(false);
+                    } else if (txtCMND.getText().length() == 0 || txtTKNV.getText().length() == 0 || txtMKNV.getText().length() ==0) {
+                        btnXN.setEnabled(false);
+                    } else {
                         btnXN.setEnabled(true);
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if (txtTenNV.getText().length() == 0) {
-                       btnXN.setEnabled(false);
-                   } else {
+                     if (txtTenNV.getText().length() == 0) {
+                    btnXN.setEnabled(false);
+                    } else if (txtCMND.getText().length() == 0 || txtTKNV.getText().length() == 0 || txtMKNV.getText().length() ==0) {
+                        btnXN.setEnabled(false);
+                    } else {
                         btnXN.setEnabled(true);
                     }
                 }
@@ -89,85 +95,103 @@ public class GDSuaNV extends javax.swing.JFrame {
             txtCMND.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                   if(txtCMND.getText().length() == 0) {
+                    if(txtCMND.getText().length() == 0 ){
+                    btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtTKNV.getText().length()==0 || txtMKNV.getText().length() == 0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                   if(txtCMND.getText().length() == 0) {
+                  if(txtCMND.getText().length() == 0 ){
+                    btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtTKNV.getText().length()==0 || txtMKNV.getText().length() == 0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if(txtCMND.getText().length() == 0) {
+                   if(txtCMND.getText().length() == 0 ){
+                    btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtTKNV.getText().length()==0 || txtMKNV.getText().length() == 0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
             });
             txtTKNV.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                   if(txtTKNV.getText().length() == 0) {
+                  if(txtTKNV.getText().length()==0) {
+                    btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtCMND.getText().length() == 0 || txtMKNV.getText().length() ==0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                   if(txtTKNV.getText().length() == 0) {
+                   if(txtTKNV.getText().length()==0) {
+                    btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtCMND.getText().length() == 0 || txtMKNV.getText().length() ==0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if(txtTKNV.getText().length() == 0) {
+                   if(txtTKNV.getText().length()==0) {
+                    btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtCMND.getText().length() == 0 || txtMKNV.getText().length() ==0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
             });
             txtMKNV.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                   if(txtMKNV.getText().length() == 0) {
+                   if(txtMKNV.getText().length()==0) {
+                     btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtCMND.getText().length() == 0 || txtTKNV.getText().length() == 0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                   if(txtMKNV.getText().length() == 0) {
+                   if(txtMKNV.getText().length()==0) {
+                     btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtCMND.getText().length() == 0 || txtTKNV.getText().length() == 0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if(txtMKNV.getText().length() == 0) {
+                   if(txtMKNV.getText().length()==0) {
+                     btnXN.setEnabled(false);
+                    } else if (txtTenNV.getText().length() == 0 || txtCMND.getText().length() == 0 || txtTKNV.getText().length() == 0) {
                         btnXN.setEnabled(false);
-                   } else {
+                    } else {
                         btnXN.setEnabled(true);
-                   }
+                    }
                 }
             });
         }

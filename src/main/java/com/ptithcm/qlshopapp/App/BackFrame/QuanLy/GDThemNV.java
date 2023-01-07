@@ -397,7 +397,6 @@ public class GDThemNV extends javax.swing.JFrame {
             }
             int soNV = lnv.size()+1 ;
             String manv = "Y22NV" + String.format("%03d", soNV) ;
-            System.out.println(manv);
             nv.setMaNV(manv);
             nv.setTenNV(txtTenNV.getText());
             if (RadioNam.isSelected()) {

@@ -137,7 +137,7 @@ public class GDChiTietHoaDon extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 9, Short.MAX_VALUE)
+            .addGap(0, 4, Short.MAX_VALUE)
         );
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

@@ -14,9 +14,9 @@ import java.sql.DriverManager;
 public class OpenConnectDataBase {
       public static Connection OpenConnection() throws Exception {
        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String URL = "jdbc:sqlserver://localhost;database=QLShopQA;encrypt=true;trustServerCertificate=true;";
+        String URL = "jdbc:sqlserver://localhost;database=ShopQA;encrypt=true;trustServerCertificate=true;";
            String user = "sa";
-           String pasword = "12345678";
+           String pasword = "mon704412";
            Connection con = DriverManager.getConnection(URL, user, pasword);
            return con;
    }
